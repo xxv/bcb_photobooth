@@ -1,0 +1,6 @@
+Make badges for BarCamp attendees.
+
+Loads data from a Django site, which can load the data from
+Eventbrite or other sources.
+
+You can join all the PDFs into one using pdfjam (pdfjoin).
