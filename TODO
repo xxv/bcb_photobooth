@@ -1,0 +1,15 @@
+pull in talk/workshop data from google docs
+
+create models for:
+    locations (rooms where talks are held)
+    timeslots 
+    talks (room,timeslot,[host])
+    attend (attendee,talk)
+
+add space for sponsors
+
+surface talk data as json or whatnot
+
+redesign current photobooth page?
+
+build interactive map of talks
