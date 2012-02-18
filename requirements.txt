@@ -1,0 +1,10 @@
+django-taggit==0.9.3
+django-storages==1.1.1
+boto==1.9b
+sorl-thumbnail==11.01
+PIL==1.1.7
+eventbrite==0.21-beta
+# for the @async decorator
+djutils==0.3.0
+## The following requirements were added by pip --freeze:
+distribute==0.6.10

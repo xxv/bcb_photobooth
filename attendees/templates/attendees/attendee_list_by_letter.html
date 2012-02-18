@@ -1,0 +1,12 @@
+{% extends "attendees/attendee_list.html" %}
+
+{% block header_right %}{{event.end_date|date:'N Y'}}{% endblock %}
+{% block page_title %}{{ event.title }} Attendees{% if current_letter %} ~ {{ current_letter }}{% endif %}{% endblock %}
+{% block title %}{{ event.title }}{% if current_letter %} ~ {{ current_letter }}{% endif %}{% endblock %}
+{% block content %}
+<ul class="letters">{% for letter in letters %}
+<li{% if letter == current_letter %} class="current"{% endif %}><a href="{% url event_attendees_by_letter event.slug letter %}">{{ letter }}</a></li>{% endfor %}
+<li{% if not current_letter %} class="current"{% endif %}><a href="{% url event_detail event.slug %}">all</a></li>
+</ul>
+{{ block.super }}
+{% endblock content %}

@@ -1,0 +1,9 @@
+{% extends "attendees/attendee_list.html" %}
+
+{% block header_left %}Attendees{% endblock %}
+{% block header_right %}{{event.end_date|date:'N Y'}}{% endblock %}
+{% block page_title %}Attendees{% if current_letter %} ~ {{ current_letter }}{% endif %}{% endblock %}
+{% block title %}{{ tag.name }}{% endblock %}
+{% block content %}
+{{ block.super }}
+{% endblock content %}

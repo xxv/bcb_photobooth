@@ -1,0 +1,13 @@
+{% extends "base.xhtml" %}
+{% block page_title %}BarCampBoston Attendee Photo Albums{% endblock %}
+{% block header %}
+<h1>BarCampBoston Attendee Photo Albums</h1>
+{% endblock %}
+{% block content %}
+<ul>
+{% for event in event_list %}
+<h2>{{event.start_date|date:'N Y'}}</h2>
+<li><a href="{% url event_attendees_by_letter event.slug 'a' %}">{{event.title}}</a></li>
+{% endfor %}
+</ul>
+{% endblock content %}

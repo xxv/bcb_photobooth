@@ -1,0 +1,10 @@
+{% extends "base.xhtml" %}
+
+{% block header_left %}Attendees{% endblock %}
+{% block page_title %}Attendees{% endblock %}
+{% block title %}{{ title }}{% endblock %}
+{% block content %}
+{% for attendee in attendee_list %}
+{% include "attendees/attendee.html" %}
+{% endfor %}
+{% endblock content %}

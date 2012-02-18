@@ -1,0 +1,17 @@
+{% load thumbnail %}<div class="attendee">
+    {% thumbnail attendee.photo "150x300" as photo %}
+        <img class="photo" src="{{ photo.url }}" alt="" />
+        {% empty %}
+        <img class="photo nophoto" src="{{MEDIA_URL}}no_photo_150x300.jpg" alt="" />
+        {% endthumbnail %}
+        <div class="name">{{ attendee.name }}</div>
+        {% if attendee.affiliation %}<div class="affiliation">{{ attendee.affiliation }}</div>{% endif %}
+        {% if attendee.website %}<div class="website">☞{{ attendee.website|urlizetrunc:25 }}</div>{% endif %}
+        {% if attendee.twitter %}<div class="twitter">☎<a href="http://twitter.com/{{ attendee.twitter }}">{{attendee.twitter}}</a></div>{% endif %}
+        <ul class="tags">
+        {% for tag in attendee.tags.values|slice:":3" %}
+        {% if tag.slug %}<li class="tag"><a href="{% url tag tagslug=tag.slug %}">{{ tag.name }}</a></li>{% endif %}
+        {% endfor %}
+    </ul>
+    </div>
+
