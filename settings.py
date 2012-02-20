@@ -42,6 +42,6 @@ INSTALLED_APPS = (
 )
 
 try:
-    from local_settings import *
+    from local_django_settings import *
 except:
     pass
