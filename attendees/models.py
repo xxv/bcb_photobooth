@@ -2,6 +2,8 @@ from django.db import models
 
 from taggit.managers import TaggableManager
 
+import datetime
+
 
 # Create your models here.
 class Attendee(models.Model):
@@ -50,3 +52,31 @@ class EventbriteConfig(models.Model):
     apikey = models.CharField(max_length=16)
     userkey = models.CharField(max_length=20)
     sync_events = models.ManyToManyField('Event', blank=True, null=True, verbose_name="events to sync with Eventbrite")
+
+class Room(models.Model):
+    name = models.CharField(max_length=200)
+    slug = models.SlugField() #TODO cazbot forgets how to auto-generate slug from name
+
+    def __unicode__(self):
+        return self.name
+
+class TimeSlot(models.Model):
+    name = models.CharField(max_length=100)
+    start_time = models.DateTimeField()
+    end_time = models.DateTimeField()
+
+    def __unicode__(self):
+        return self.name
+
+    def isActive(self):
+        #TODO return now() > start_time && < end_time ?
+        return true
+
+class Talk(models.Model):
+    name = models.CharField(max_length=200)
+    room = models.ForeignKey(Room)
+    time = models.ForeignKey(TimeSlot)
+    host = models.ManyToManyField(Attendee)
+
+    def __unicode__(self):
+        return self.name
