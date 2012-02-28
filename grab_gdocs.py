@@ -1,12 +1,34 @@
+#!/usr/bin/python
+
 import gdata.docs
 import gdata.docs.service
 import gdata.spreadsheet.service
-import re, os
+import re, json, sys, os
+
+from django_bootstrap import bootstrap
+bootstrap(__file__)
+
+from django.core.exceptions import ObjectDoesNotExist
+
+from attendees.models import Room, TimeSlot, Talk
 
 try:
     from local_gdoc_settings import *
 except:
     pass
+
+def add_rooms(row):
+    for room_name, capacity in row.items():
+        if room_name != 'time':
+            try:
+                room = Room.objects.get(name=room_name)
+            except ObjectDoesNotExist:
+                print "no room, adding one"
+                room = Room(name=room_name, capacity=capacity)
+                #room.save()
+
+def add_timeslots_and_talks(row):
+    print row
 
 # Connect to Google
 gd_client = gdata.spreadsheet.service.SpreadsheetsService()
@@ -36,4 +58,13 @@ for entry in rows:
         entry.custom.keys(), 
         [ value.text for value in entry.custom.values() ] 
     ))
+    if entrydict['time'] == None:
+        print 'adding rooms'
+        add_rooms(entrydict)
+    else:
+        print 'adding timeslot and talks'
+        #add_timeslots_and_talks(entrydict)
+
+
     print entrydict    
+

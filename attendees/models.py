@@ -5,7 +5,6 @@ from taggit.managers import TaggableManager
 import datetime
 
 
-# Create your models here.
 class Attendee(models.Model):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
@@ -56,6 +55,7 @@ class EventbriteConfig(models.Model):
 class Room(models.Model):
     name = models.CharField(max_length=200)
     slug = models.SlugField() #TODO cazbot forgets how to auto-generate slug from name
+    capacity = models.IntegerField()
 
     def __unicode__(self):
         return self.name
