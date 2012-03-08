@@ -2,8 +2,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" 
-      xml:lang="en" lang="en">
+<!--[if lt IE 7 ]><html xmlns="http://www.w3.org/1999/xhtml" lang="en" class="no-js ie6"><![endif]-->
+<!--[if IE 7 ]><html xmlns="http://www.w3.org/1999/xhtml" lang="en" class="no-js ie7"><![endif]-->
+<!--[if IE 8 ]><html xmlns="http://www.w3.org/1999/xhtml" lang="en" class="no-js ie8"><![endif]-->
+<!--[if IE 9 ]><html xmlns="http://www.w3.org/1999/xhtml" lang="en" class="no-js ie9"><![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html xmlns="http://www.w3.org/1999/xhtml" lang="en" class="no-js"> <!--<![endif]-->
 <head>
     <title>{% block page_title %}{% endblock page_title %}</title>
     <!-- include jQuery library -->
@@ -15,11 +18,13 @@
     <!--<script type="text/javascript" src="http://cloud.github.com/downloads/malsup/cycle/jquery.cycle.all.2.74.js"></script>-->
 
     <link rel="shortcut icon" href="{{MEDIA_URL}}site_icon.png">
-    <link href='http://fonts.googleapis.com/css?family=Old+Standard+TT:regular,italic,bold' rel='stylesheet' type='text/css'>
-    <!--    <link href='http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'> -->
-    <link href='http://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css' />
-    <link type="text/css" media="all" rel="stylesheet" href="{{MEDIA_URL}}structure.css" />
-    <link type="text/css" media="all" rel="stylesheet" href="{{MEDIA_URL}}style.css" />
+<!--    <link type="text/css" media="all" rel="stylesheet" href="{{MEDIA_URL}}css/style-0034.css" />-->
+    <link type="text/css" media="all" rel="stylesheet" href="{{MEDIA_URL}}css/style.css" />
+    <link rel="shortcut icon" href="{{MEDIA_URL}}favicon.ico">
+    <link rel="apple-touch-icon" href="{{MEDIA_URL}}apple-touch-icon.png">
+<!--    <link rel="stylesheet" href="{{MEDIA_URL}}css/style-0034.min.css">-->
+    <link rel="stylesheet" media="handheld" href="{{MEDIA_URL}}css/handheld.css">
+    <script src="{{MEDIA_URL}}js/libs/modernizr-1.7.min.js"></script>
     {% block head %}{% endblock %}
 </head>
   <body>
@@ -52,6 +57,8 @@
     <section id="mainmenu">
         {% show_menu "main" "unordered-list" %}
     </section>
+
+    <!-- XXX re-enable
 <script type="text/javascript">
 
   var _gaq = _gaq || [];
@@ -65,5 +72,6 @@
   })();
 
 </script>
+-->
 </body>
 </html>
