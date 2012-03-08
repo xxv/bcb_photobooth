@@ -20,6 +20,9 @@ class Attendee(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     last_modified = models.DateTimeField(auto_now=True)
 
+    sponsor = models.BooleanField(default=False)
+    patron = models.BooleanField(default=False)
+
     tags = TaggableManager(blank=True)
 
     def name(self):
