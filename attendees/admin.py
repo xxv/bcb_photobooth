@@ -12,3 +12,7 @@ admin.site.register(Attendee, AttendeeAdmin)
 admin.site.register(Event, EventAdmin)
 
 admin.site.register(EventbriteConfig)
+
+admin.site.register(Room)
+admin.site.register(TimeSlot)
+admin.site.register(Talk)

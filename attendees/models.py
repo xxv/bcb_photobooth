@@ -54,7 +54,7 @@ class EventbriteConfig(models.Model):
 
 class Room(models.Model):
     name = models.CharField(max_length=200)
-    slug = models.SlugField() #TODO cazbot forgets how to auto-generate slug from name
+    #slug = models.SlugField(blank=True, null=True) #TODO cazbot forgets how to auto-generate slug from name
     capacity = models.IntegerField()
 
     def __unicode__(self):
@@ -62,8 +62,8 @@ class Room(models.Model):
 
 class TimeSlot(models.Model):
     name = models.CharField(max_length=100)
-    start_time = models.DateTimeField()
-    end_time = models.DateTimeField()
+    #start_time = models.DateTimeField()
+    #end_time = models.DateTimeField()
 
     def __unicode__(self):
         return self.name
@@ -73,7 +73,7 @@ class TimeSlot(models.Model):
         return true
 
 class Talk(models.Model):
-    name = models.CharField(max_length=200)
+    name = models.CharField(max_length=255)
     room = models.ForeignKey(Room)
     time = models.ForeignKey(TimeSlot)
     host = models.ManyToManyField(Attendee)
