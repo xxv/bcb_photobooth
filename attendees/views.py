@@ -1,5 +1,7 @@
 import json
 
+import logging
+
 from django.http import HttpResponse, HttpResponseBadRequest
 from django.shortcuts import get_object_or_404
 from django.views.generic import list_detail
@@ -12,6 +14,9 @@ from sorl import thumbnail
 
 from attendees.forms import AttendeeForm
 from attendees.models import Attendee, Event
+
+# Get an instance of a logger
+logger = logging.getLogger(__name__)
 
 @require_http_methods(["GET"])
 def show_event_attendee_by_letter(request, event_slug, letter=None):
@@ -131,6 +136,11 @@ def perform_sync():
     ebc = EventbriteClient(eb.apikey, eb.userkey)
     loaded = []
     for event in eb.sync_events.all():
-        load_attendees(ebc.list_event_attendees(event_id=event.eb_id))
-        loaded.append(event.title)
-    return HttpResponse("successfully loaded attendees for all events: %s." % (", ".join(loaded)))
+        try:
+            attendees = ebc.list_event_attendees(event_id=int(event.eb_id))
+            load_attendees(event, attendees)
+            loaded.append(event.title)
+        except Exception as e:
+            logger.error("error loading event %s: %s\n" % (event, e))
+    logger.info("successfully loaded attendees for all events: %s." % (", ".join(loaded)))
+

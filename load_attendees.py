@@ -44,8 +44,7 @@ def filter_site(site):
 def filter_tags(tags):
     return map(lambda t: t.strip(), tags.split(','))
 
-def load_attendees(doc):
-    bcb = Event.objects.all()[0]
+def load_attendees(event, doc):
 
     attendees = doc['attendees']
     for attendeeObj in attendees:
@@ -76,7 +75,7 @@ def load_attendees(doc):
         if '957331' in answers:
             tags = filter_tags(answers['957331'].lower())
             a.tags.set(*tags)
-        a.events.add(bcb)
+        a.events.add(event)
 
 if __name__ == "__main__":
     load_attendees(json.load(open(sys.argv[1])))
