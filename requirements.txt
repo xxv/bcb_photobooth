@@ -6,5 +6,6 @@ PIL==1.1.7
 eventbrite==0.21-beta
 # for the @async decorator
 djutils==0.3.0
+django-treemenus==0.8.7
 ## The following requirements were added by pip --freeze:
 distribute==0.6.10

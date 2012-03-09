@@ -1,3 +1,4 @@
+{% load tree_menu_tags %}
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -48,6 +49,9 @@
             </div>
         </div>
     </div>
+    <section id="mainmenu">
+        {% show_menu "main" "unordered-list" %}
+    </section>
 <script type="text/javascript">
 
   var _gaq = _gaq || [];
