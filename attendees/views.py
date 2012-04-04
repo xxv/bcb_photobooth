@@ -1,4 +1,5 @@
 import json
+import sys
 
 import logging
 
@@ -140,7 +141,7 @@ def perform_sync():
             attendees = ebc.list_event_attendees(event_id=int(event.eb_id))
             load_attendees(event, attendees)
             loaded.append(event.title)
-        except Exception as e:
+        except RuntimeError as e:
             logger.error("error loading event %s: %s\n" % (event, e))
     logger.info("successfully loaded attendees for all events: %s." % (", ".join(loaded)))
 

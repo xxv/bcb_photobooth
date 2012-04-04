@@ -1,13 +1,13 @@
 #!/usr/bin/env python
 
-import sys, os
+import sys
 import re
 import json
 
 from django_bootstrap import bootstrap
 bootstrap(__file__)
 
-from attendees.models import Attendee, Event
+from attendees.models import Attendee
 
 def eb_questions(attendee):
     a = {}
@@ -59,21 +59,25 @@ def load_attendees(event, doc):
         a.last_name = attendee['last_name'].strip()
         #print "%s %s" % (a.first_name, a.last_name)
         answers = eb_questions(attendee)
-        if '957323' in answers:
-            twitter = filter_twitter(answers['957323'].split(',')[0])
+        # bcb6 if '957323' in answers:
+        if '1965641' in answers:
+            twitter = filter_twitter(answers['1965641'].split(',')[0])
             if twitter:
                 a.twitter = twitter
-        if '957329' in answers:
-            site = filter_site(answers['957329'].split(',')[0])
+        # bcb6 if '957329' in answers:
+        if '1965653' in answers:
+            site = filter_site(answers['1965653'].split(',')[0])
             if site:
                 a.website = site
-        if '957327' in answers:
-            a.affiliation = answers['957327']
+        # bcb6 if '957327' in answers:
+        if '1965645' in answers:
+            a.affiliation = answers['1965645']
             
         a.save()
         # now add the relations
-        if '957331' in answers:
-            tags = filter_tags(answers['957331'].lower())
+        # bcb6 if '957331' in answers:
+        if '1965659' in answers:
+            tags = filter_tags(answers['1965659'].lower())
             a.tags.set(*tags)
         a.events.add(event)
 
