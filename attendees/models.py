@@ -26,7 +26,10 @@ class Attendee(models.Model):
     tags = TaggableManager(blank=True)
 
     def name(self):
-        return "%s %s" % (self.first_name, self.last_name)
+        return u"%s %s" % (self.first_name, self.last_name)
+
+    def event_names(self):
+        return u", ".join([event.title for event in self.events.all()])
 
     class Meta:
         ordering = ["last_name"]

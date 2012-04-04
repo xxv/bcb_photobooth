@@ -6,7 +6,7 @@ class EventAdmin(admin.ModelAdmin):
 
 class AttendeeAdmin(admin.ModelAdmin):
     search_fields = ['^first_name', '^last_name', '^twitter', 'affiliation', 'website']
-    list_display = ('__unicode__', 'twitter', 'website', 'affiliation', 'eb_id')
+    list_display = ('__unicode__', 'twitter', 'website', 'affiliation', 'eb_id', 'event_names', 'sponsor', 'patron')
 
 admin.site.register(Attendee, AttendeeAdmin)
 admin.site.register(Event, EventAdmin)
