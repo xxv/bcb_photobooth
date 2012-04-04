@@ -28,6 +28,9 @@
     {% block head %}{% endblock %}
 </head>
   <body>
+    <nav id="mainmenu">
+        {% show_menu "main" "unordered-list" %}
+    </nav>
       <div id="header">{% block header %}
           <div class="section_title">{% block header_left %}{% endblock %}</div>
           <div class="section_date">{% block header_right %}{% endblock %}</div>
@@ -54,9 +57,6 @@
             </div>
         </div>
     </div>
-    <section id="mainmenu">
-        {% show_menu "main" "unordered-list" %}
-    </section>
 
     <!-- XXX re-enable
 <script type="text/javascript">

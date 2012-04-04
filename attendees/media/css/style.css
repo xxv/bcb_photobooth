@@ -343,6 +343,64 @@ h2.dayname {
   text-transform: uppercase;
 }
 
+/* steve changes
+ */
+#mainmenu {
+    background-color: #fff;
+    text-align: right;
+    margin-left: auto; margin-right: auto;
+    max-width: 800px;
+}
+
+#mainmenu ul {
+    display: block;
+}
+#mainmenu li {
+    display: inline-block;
+    padding: 1em;
+}
+
+.letters {
+}
+
+.letters li {
+    display: inline-block;
+}
+
+.letters li a {
+    display: inline-block;
+    padding: 0.8em;
+    padding-top: 0.25em;
+    padding-bottom: 0.25em;
+    background-color: #aaa;
+    min-width: 1em;
+    text-align: center;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 2px;
+    margin-right: -0.5em;
+    z-index: 0;
+    position: relative;
+    box-shadow: 0 1px 3px #000;
+    vertical-align: bottom;
+    text-transform: uppercase;
+}
+
+.letters li.current a {
+    background-color: #ccc;
+    padding-bottom: 0.5em;
+}
+
+
+.letters li a {
+    text-decoration: none;
+    color: #000;
+}
+
+.attendee {
+    display: inline-block;
+    margin: 1em;
+}
+/* end steve changes */
 #details nav ul {
   padding-right: 1em;
 }
