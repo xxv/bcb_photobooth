@@ -1,0 +1,324 @@
+<!doctype html>
+<html>
+    <head>
+        <script src="js/jquery-1.7.2.js"></script>
+        <script src="js/raphael.js"></script>
+        <script>
+            var gdata = {io:{handleScriptLoaded:function(data){callback(data)}}},
+                talks = {
+                    sat: {
+                        '9'  : {'B':' ','C':' ','D':' ','E':' ','F':' ','G':' ','H':' ','I':' ','J':' '}, //event-wide (regi/breakfast)
+                        '10' : {'B':' ','C':' ','D':' ','E':' ','F':' ','G':' ','H':' ','I':' ','J':' '}, //event-wide (plenary/intro)
+                        '12' : {'B':' ','C':' ','D':' ','E':' ','F':' ','G':' ','H':' ','I':' ','J':' '},
+                        '13' : {'B':' ','C':' ','D':' ','E':' ','F':' ','G':' ','H':' ','I':' ','J':' '},
+                        '14' : {'B':' ','C':' ','D':' ','E':' ','F':' ','G':' ','H':' ','I':' ','J':' '},
+                        '15' : {'B':' ','C':' ','D':' ','E':' ','F':' ','G':' ','H':' ','I':' ','J':' '}, //event-wide (lunch)
+                        '16' : {'B':' ','C':' ','D':' ','E':' ','F':' ','G':' ','H':' ','I':' ','J':' '},
+                        '17' : {'B':' ','C':' ','D':' ','E':' ','F':' ','G':' ','H':' ','I':' ','J':' '},
+                        '18' : {'B':' ','C':' ','D':' ','E':' ','F':' ','G':' ','H':' ','I':' ','J':' '},
+                        '19' : {'B':' ','C':' ','D':' ','E':' ','F':' ','G':' ','H':' ','I':' ','J':' '},
+                        '20' : {'B':' ','C':' ','D':' ','E':' ','F':' ','G':' ','H':' ','I':' ','J':' '},
+                        '21' : {'B':' ','C':' ','D':' ','E':' ','F':' ','G':' ','H':' ','I':' ','J':' '},
+                        '22' : {'B':' ','C':' ','D':' ','E':' ','F':' ','G':' ','H':' ','I':' ','J':' '}, //event-wide (afterparty)
+                        '23' : {'B':' ','C':' ','D':' ','E':' ','F':' ','G':' ','H':' ','I':' ','J':' '} //event-wide (end of day 1)
+                    },
+                    sun : {
+                        '9'  : {'B':' ','C':' ','D':' ','E':' ','F':' ','G':' ','H':' ','I':' ','J':' '}, //event-wide (regi/breakfast)
+                        '10' : {'B':' ','C':' ','D':' ','E':' ','F':' ','G':' ','H':' ','I':' ','J':' '},
+                        '11' : {'B':' ','C':' ','D':' ','E':' ','F':' ','G':' ','H':' ','I':' ','J':' '},
+                        '12' : {'B':' ','C':' ','D':' ','E':' ','F':' ','G':' ','H':' ','I':' ','J':' '},
+                        '13' : {'B':' ','C':' ','D':' ','E':' ','F':' ','G':' ','H':' ','I':' ','J':' '},
+                        '14' : {'B':' ','C':' ','D':' ','E':' ','F':' ','G':' ','H':' ','I':' ','J':' '},
+                        '15' : {'B':' ','C':' ','D':' ','E':' ','F':' ','G':' ','H':' ','I':' ','J':' '}, //event-wide (lunch)
+                        '16' : {'B':' ','C':' ','D':' ','E':' ','F':' ','G':' ','H':' ','I':' ','J':' '},
+                        '17' : {'B':' ','C':' ','D':' ','E':' ','F':' ','G':' ','H':' ','I':' ','J':' '},
+                        '18' : {'B':' ','C':' ','D':' ','E':' ','F':' ','G':' ','H':' ','I':' ','J':' '},
+                        '19' : {'B':' ','C':' ','D':' ','E':' ','F':' ','G':' ','H':' ','I':' ','J':' '}, //event-wide (Closing Session)
+                        '20' : {'B':' ','C':' ','D':' ','E':' ','F':' ','G':' ','H':' ','I':' ','J':' '} //event-wide (Doors close)
+                    }
+                },
+                isSat = true,
+                rooms = {
+                    'B': 'horace-mann',
+                    'C': 'thomas-paul',
+                    'D': 'deborah-sampson',
+                    'E': 'abigail-adams',
+                    'F': 'crispus-attacks',
+                    'G': 'area-1220',
+                    'H': 'area-1235',
+                    'I': 'area-1255',
+                    'J': '11th-floor'
+                };
+
+
+            function callback(data) {
+                function processCell(talk) {
+                    var c = splitCellName(talk.title.$t);
+                    if (c) {
+                        talks[(isSat ? 'sat' : 'sun')][c[1]][c[0]] = talk.content.$t
+                    }
+                }
+                
+                function splitCellName(title) {
+                    var col = title[0],
+                        row = title.substring(1)
+                    if ((rooms[col]) && (talks[(isSat ? 'sat' : 'sun')][row])) {
+                        return [col, row]
+                    } else {
+                        return false
+                    }
+                }
+
+                var cells = data.feed.entry;
+
+                for (var x=0, len=cells.length; x < len; x++) {
+                    processCell(cells[x])
+                }
+                // If saturday, load sunday
+                if (isSat) {
+                    $("head").append('<script src="https://spreadsheets.google.com/feeds/cells/0AiPSd498xaohdGMzdzJNcnF5eE9zV3Q1UFp6T0t5c1E/od5/public/basic?alt=json-in-script"><\/script>')
+                    isSat = false
+                }
+            }
+
+            $(function() {
+                var tip = $("#tip").hide(),
+                    tipText = "",
+                    over = false;
+
+                function addTalksToTooltip(dayNum) {
+                    var day = dayNum.substring(0,3),
+                        num = dayNum.substring(3);
+                    for (var talk in talks[day][num]) {
+                        (function() {
+                            var room = '#'+rooms[talk];
+                            var text = talks[day][num][talk]
+                            $(room+' p').html(text)
+                        })()
+                    }
+                    makeTooltips();
+                }
+                        
+                function makeTooltips() {
+                    var current = null;
+                    for (var state in map) {
+                        map[state].color = Raphael.getColor();
+                        (function (st, state) {
+                            st[0].style.cursor = "pointer";
+                            var stateID = '#'+state;
+                            var stateContent = $(stateID).html();
+                            $(st[0]).mouseover(function(){
+                                map[state].animate({fill: "#666", stroke: "#000"}, 500) ;
+                                document.getElementById(state).style.display = "";
+                                st.animate({fill: st.color, stroke: "#000"}, 500);
+                                st.toFront();
+                                R.safari();
+                                tipText = stateContent;
+                                $(tip).stop(true, true).fadeIn();
+                                over = true;
+                            }).mouseout(function(){
+                                st.animate({fill: "#666", stroke: "#000"}, 500);
+                                st.toFront();
+                                R.safari();
+                                $(tip).stop(true, true).fadeOut();
+                                over = false;
+                            });
+                        })(map[state], state);
+                    }
+                    $(document).mousemove(function(e){
+                        if (over){
+                            $(tip).css("left", e.offsetX-100).css("top", e.offsetY+20);
+                            $(tip).html(tipText);
+                        }
+                    });
+                }
+
+                var R = Raphael("paper", 750, 440), //set height and width of svg
+                    attr_bg = {
+                        fill: "#333",
+                        stroke: "#000",
+                        "stroke-width": 1,
+                        "stroke-linejoin": "round"
+                    },
+                    attr_empty = {
+                        fill: "#000",
+                        stroke: "#000",
+                        "stroke-width": 1,
+                        "stroke-linejoin": "round"
+                    },
+                    attr = {
+                        fill: "#666",
+                        stroke: "#000",
+                        "stroke-width": 1,
+                        "stroke-linejoin": "round"
+                    },
+                    map_background = {
+                        'background'           : R.path("M 120.8 75.7 L 345.2 75.7 L 345.2 25.3 L 488.9 25.3 L 488.9 75.1 L 578.4 75.1 L 578.4 25.3 L 723.3 25.3 L 723.3 75.1 L 723.3 141 L 505.1 141 L 358.3 414.6 L 30.6 267.4Z").attr(attr_bg),
+                        'empty_zone'           : R.path("M 377 307.6 L 465.9 141 L 358.3 141 L 358.3 307.6Z").attr(attr_empty),
+                    },
+                    map = {
+                        'deborah-sampson' : R.path("M 247.6 213.1 L 156.2 213.1 L 156.2 254.8 L 247.6 307.6Z").attr(attr),
+                        'horace-mann'     : R.path("M 248.9 141.6 L 358.3 141.6 L 358.3 307.6 L 247.6 307.6Z").attr(attr),
+                        'thomas-paul'     : R.path("M 248.2 141.6 L 156.2 141.6 L 156.2 213.7 L 247.6 213.7Z").attr(attr),
+                        'abigail-adams'   : R.path("M 578.4 25.3 L 578.4 75.1 L 650.9 75.1 L 650.9 25.3Z").attr(attr),
+                        'crispus-attacks' : R.path("M 650.3 25.3 L 650.3 75.1 L 723.3 75.1 L 723.3 25.3Z").attr(attr),
+                        'area-1220'       : R.path("M 490.8 25.3 L 490.8 75.1 L 345.2 75.1 L 345.2 25.3Z").attr(attr),
+                        'area-1235'       : R.path("M 94 218.8 L 112.2 179.5 L 156.2 179.5 L 156.2 254.8Z").attr(attr),
+                        'area-1255'       : R.path("M 307.3 307.6 L 307.3 347.4 L 350.2 359.9 L 377 307.6Z").attr(attr),
+                        '11th-floor'      : R.circle(600, 285, 100).attr(attr)
+                    };
+                $('#nav-select').change(function() { 
+                    addTalksToTooltip(this.value) 
+                })
+                // DO current datetime calc here
+                addTalksToTooltip($('#nav-select').val());
+
+            })
+
+
+        </script>
+        <!--<script src="https://spreadsheets.google.com/feeds/cells/0AiPSd498xaohdGMzdzJNcnF5eE9zV3Q1UFp6T0t5c1E/od5/public/basic?alt=json-in-script">
+            //Sunday
+        </script>-->
+        <script src="https://spreadsheets.google.com/feeds/cells/0AiPSd498xaohdGMzdzJNcnF5eE9zV3Q1UFp6T0t5c1E/od6/public/basic?alt=json-in-script">
+            //Saturday
+        </script>
+        <style>
+            body {
+                font-family: Verdana, sans;
+            }
+            #container {
+                width 800px;
+                margin: 0 auto;
+                text-align: center;
+            }
+            #canvas {
+                height: 440px;
+                position: relative;
+                width: 750px;
+                margin: 0 auto;
+                text-align: center;
+            }
+            #paper {
+                height: 440px;
+                position: relative;
+                width: 750px;
+                display:block;
+            }
+            .tip-body {
+                display: none;
+                height: 400px;
+            }
+            h2, p {
+                text-align: center;
+            }
+            #tip{
+                overflow: auto;
+                position: absolute;
+                right: 0;
+                top: 0;
+                width: 300px;
+
+                position : absolute;
+                background-color : #efefef;
+                color:#333;
+                padding : 3px;
+                z-index: 1000;
+                max-width: 200px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="container">
+
+            <h2>BarCamp Boston 7 Event Map</h2>
+            <p id="copy">See what's happening when and where at BarCamp.</p>
+
+            <div id="nav">
+                <select id="nav-select">
+                    <optgroup label="sat">
+                        <option value="sat9">9:00</option>
+                        <option value="sat10">10:00</option>
+                        <option value="sat12">11:00</option>
+                        <option value="sat13">11:40</option>
+                        <option value="sat14">12:20</option>
+                        <option value="sat15">1:00</option>
+                        <option value="sat16">2:00</option>
+                        <option value="sat17">2:40</option>
+                        <option value="sat18">3:20</option>
+                        <option value="sat19">4:00</option>
+                        <option value="sat20">4:40</option>
+                        <option value="sat21">5:20</option>
+                        <option value="sat22">6:00</option>
+                        <option value="sat23">9:00</option>
+                    </optgroup>
+                    <optgroup label="sun">
+                        <option value="sun9">9:00</option>
+                        <option value="sun10">10:00</option>
+                        <option value="sun11">10:40</option>
+                        <option value="sun12">11:20</option>
+                        <option value="sun13">12:00</option>
+                        <option value="sun14">12:30</option>
+                        <option value="sun15">1:00</option>
+                        <option value="sun16">2:00</option>
+                        <option value="sun17">2:40</option>
+                        <option value="sun18">3:20</option>
+                        <option value="sun19">4:00</option>
+                        <option value="sun20">5:00</option>
+                    </optgroup>
+                </select>
+            </div>
+
+
+            <div id="canvas">
+                <div id="paper"></div>
+                <div id="tip"></div>
+                <div id="horace-mann" class="tip-body">
+                    <h2>Horace Mann</h2>
+                    <p>
+                    </p>
+                </div>
+                <div id="thomas-paul" class="tip-body">
+                    <h2>Thomas Paul</h2>
+                    <p>
+                    </p>
+                </div>
+                <div id="deborah-sampson" class="tip-body">
+                    <h2>Deborah Sampson</h2>
+                    <p>
+                    </p>
+                </div>
+                <div id="abigail-adams" class="tip-body">
+                    <h2>Abigail Adams</h2>
+                    <p>
+                    </p>
+                </div>
+                <div id="crispus-attacks" class="tip-body">
+                    <h2>Crispus Attacks</h2>
+                    <p>
+                    </p>
+                </div>
+                <div id="area-1220" class="tip-body">
+                    <h2>Area 1220</h2>
+                    <p>
+                    </p>
+                </div>
+                <div id="area-1235" class="tip-body">
+                    <h2>Area 1235</h2>
+                    <p>
+                    </p>
+                </div>
+                <div id="area-1255" class="tip-body">
+                    <h2>Area 1255</h2>
+                    <p>
+                    </p>
+                </div>
+                <div id="11th-floor" class="tip-body">
+                    <h2>11th Floor</h2>
+                    <p>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
