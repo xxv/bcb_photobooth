@@ -1,0 +1,44 @@
+<!doctype html>
+<htmL>
+    <head>
+        <script src="js/jquery-1.7.2.js"></script>
+        <script src="js/raphael.js"></script>
+        <style>
+
+            #map {
+                width: 500px;
+                height: 500px;
+                border: 1px solid black;
+            }
+
+            #tip{
+                position : absolute;
+                border : 1px solid gray;
+                background-color : #efefef;
+                color:#333;
+                padding : 3px;
+                z-index: 1000;
+                /* set this to create word wrap */
+                max-width: 200px;
+            }
+
+        </style>
+    </head>
+    <body>
+        <div id="map"></div>
+        <script>
+            (function() {
+                var ctx = new Raphael(document.getElementById('map'), 500, 500),
+                    sayHai = function(){alert('HAI!')},
+                    sayBai = function(){alert('BAI!')},
+                    circ = ctx.circle(250, 250, 100),
+                    txt = ctx.text(250,12, "OHAIZ!!1!!!");
+                circ.hover(sayHai, sayBai);
+                circ.attr('fill', 'violet');
+                circ.glow();
+                txt.attr('font-size', '24px');
+
+            })();
+        </script>
+    </body>
+</html>
