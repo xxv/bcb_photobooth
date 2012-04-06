@@ -44,32 +44,38 @@ event = "barcampboston7"
 #####################################################################
 
 def strip_accents(s):
-    return ''.join((c for c in unicodedata.normalize('NFD', s) if unicodedata.category(c) != 'Mn'))
+    return u''.join((c for c in unicodedata.normalize('NFD', s) if unicodedata.category(c) != 'Mn'))
 
 def get_filename(params):
     return "%s/%s_%s_%s.pdf" % (outdir, params['last_name'], params['first_name'], params['eb_id'])
 
+def make_mecard(attendee):
+    #name = strip_accents("%s %s" % (attendee.first_name, attendee.last_name))
+    name = u"%s %s" % (attendee.first_name, attendee.last_name)
+    print "Generating card for %s..." % name
+    mecard = u"MECARD:N:%s;" % name
+    if attendee.affiliation:
+        mecard += u"ORG:%s;" % attendee.affiliation
+    if attendee.website and attendee.twitter:
+        mecard += u"URL:%s;NOTE:http://twitter.com/%s;" % (attendee.website, attendee.twitter)
+    elif attendee.twitter:
+        mecard += u"URL:http://twitter.com/%s;" % attendee.twitter
+    elif attendee.website:
+        mecard += u"URL:%s;" % attendee.website
+    mecard += u"EBID:%s;" % attendee.eb_id
+    mecard += u";"
+#    mecard = strip_accents(mecard)
+    mecard = mecard.encode('utf-8')
+    print mecard
+    qrcode_url = u'http://chart.apis.google.com/chart?%s' % urllib.urlencode({"cht": u"qr", "chs": u"350x350", u"chl": mecard})
+    return qrcode_url
+
 if __name__ == '__main__':
     mkpdf = MakePdf('badge', svg_file)
     for attendee in Event.objects.get(slug=event).attendee_set.all():
-        name = strip_accents("%s %s" % (attendee.first_name, attendee.last_name))
-        print "Generating card for %s..." % name
-        mecard = "MECARD:N:%s;" % name
-        if attendee.affiliation:
-            mecard += "ORG:%s;" % attendee.affiliation
-        if attendee.website and attendee.twitter:
-            mecard += "URL:%s;NOTE:http://twitter.com/%s;" % (attendee.website, attendee.twitter)
-        elif attendee.twitter:
-            mecard += "URL:http://twitter.com/%s;" % attendee.twitter
-        elif attendee.website:
-            mecard += "URL:%s;" % attendee.website
-        mecard += "EBID:%s;" % attendee.eb_id
-        mecard += ";"
-        tags = attendee.tags.all()
-        mecard = strip_accents(mecard)
-        print mecard
-        qrcode_url = 'http://chart.apis.google.com/chart?cht=qr&chs=350x350&chl=%s' % urllib.quote(mecard)
+        qrcode_url = make_mecard(attendee)
         qrcode_file = "qrcode.png"
+        tags = attendee.tags.all()
         params = {
             "first_name": attendee.first_name, 
             "last_name": attendee.last_name,
@@ -90,14 +96,16 @@ if __name__ == '__main__':
         mkpdf.make_pdf(params, get_filename(params))
 
     print "Generating serialized blanks..."
-    for i in range(0,100):
-        mecard = "BCB6:%d" % i
-        qrcode_url = 'http://chart.apis.google.com/chart?cht=qr&chs=350x350&chl=%s' % urllib.quote(mecard)
+    for i in range(0,200):
+        mecard = "BCB7:%d" % i
+        qrcode_url = u'http://chart.apis.google.com/chart?%s' % urllib.urlencode({"cht": u"qr", "chs": u"350x350", u"chl": mecard})
         qrcode_file = "qrcode.png"
         urllib.urlretrieve(qrcode_url, qrcode_file)
         params = {
-            'lastname': "",
-            'firstname': '',
-            'eb_id': "extra_%d" % i
+            'last_name': "______________",
+            'first_name': '______________',
+            'eb_id': "extra_%d" % i,
+            'tags': ['__________', '__________', '__________'],
+            'qrcode': qrcode_file,
         }
         mkpdf.make_pdf(params, get_filename(params))
