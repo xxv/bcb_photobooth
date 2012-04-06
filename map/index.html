@@ -127,13 +127,13 @@
                     }
                     $(document).mousemove(function(e){
                         if (over){
-                            $(tip).css("left", e.clientX+20).css("top", e.clientY+20);
+                            $(tip).css("left", e.offsetX-100).css("top", e.offsetY+20);
                             $(tip).html(tipText);
                         }
                     });
                 }
 
-                var R = Raphael("paper", 900, 600), //set height and width of svg
+                var R = Raphael("paper", 750, 440), //set height and width of svg
                     attr_bg = {
                         fill: "#333",
                         stroke: "#000",
@@ -153,19 +153,19 @@
                         "stroke-linejoin": "round"
                     },
                     map_background = {
-                        'background'           : R.path("M 220.8 135.7 L 445.2 135.7 L 445.2 85.3 L 588.9 85.3 L 588.9 135.1 L 678.4 135.1 L 678.4 85.3 L 823.3 85.3 L 823.3 135.1 L 823.3 201 L 605.1 201 L 458.3 474.6 L 130.6 287.4Z").attr(attr_bg),
-                        'empty_zone'           : R.path("M 477 367.6 L 565.9 201 L 458.3 201 L 458.3 367.6Z").attr(attr_empty),
+                        'background'           : R.path("M 120.8 75.7 L 345.2 75.7 L 345.2 25.3 L 488.9 25.3 L 488.9 75.1 L 578.4 75.1 L 578.4 25.3 L 723.3 25.3 L 723.3 75.1 L 723.3 141 L 505.1 141 L 358.3 414.6 L 30.6 267.4Z").attr(attr_bg),
+                        'empty_zone'           : R.path("M 377 307.6 L 465.9 141 L 358.3 141 L 358.3 307.6Z").attr(attr_empty),
                     },
                     map = {
-                        'deborah-sampson' : R.path("M 347.6 273.1 L 256.2 273.1 L 256.2 314.8 L 347.6 367.6Z").attr(attr),
-                        'horace-mann'     : R.path("M 348.9 201.6 L 458.3 201.6 L 458.3 367.6 L 347.6 367.6Z").attr(attr),
-                        'thomas-paul'     : R.path("M 348.2 201.6 L 256.2 201.6 L 256.2 273.7 L 347.6 273.7Z").attr(attr),
-                        'abigail-adams'   : R.path("M 678.4 85.3 L 678.4 135.1 L 750.9 135.1 L 750.9 85.3Z").attr(attr),
-                        'crispus-attacks' : R.path("M 750.3 84.7 L 750.3 135.1 L 823.3 135.1 L 823.3 85.3Z").attr(attr),
-                        'area-1220'       : R.path("M 590.8 84.1 L 590.8 135.1 L 445.2 135.1 L 445.2 85.3Z").attr(attr),
-                        'area-1235'       : R.path("M 194 286.8 L 210.2 239.5 L 256.2 239.5 L 256.2 314.8Z").attr(attr),
-                        'area-1255'       : R.path("M 407.3 367.6 L 407.3 407.4 L 445.2 419.9 L 477 367.6Z").attr(attr),
-                        '11th-floor'      : R.circle(20,20,10).attr(attr)
+                        'deborah-sampson' : R.path("M 247.6 213.1 L 156.2 213.1 L 156.2 254.8 L 247.6 307.6Z").attr(attr),
+                        'horace-mann'     : R.path("M 248.9 141.6 L 358.3 141.6 L 358.3 307.6 L 247.6 307.6Z").attr(attr),
+                        'thomas-paul'     : R.path("M 248.2 141.6 L 156.2 141.6 L 156.2 213.7 L 247.6 213.7Z").attr(attr),
+                        'abigail-adams'   : R.path("M 578.4 25.3 L 578.4 75.1 L 650.9 75.1 L 650.9 25.3Z").attr(attr),
+                        'crispus-attacks' : R.path("M 650.3 25.3 L 650.3 75.1 L 723.3 75.1 L 723.3 25.3Z").attr(attr),
+                        'area-1220'       : R.path("M 490.8 25.3 L 490.8 75.1 L 345.2 75.1 L 345.2 25.3Z").attr(attr),
+                        'area-1235'       : R.path("M 94 218.8 L 112.2 179.5 L 156.2 179.5 L 156.2 254.8Z").attr(attr),
+                        'area-1255'       : R.path("M 307.3 307.6 L 307.3 347.4 L 350.2 359.9 L 377 307.6Z").attr(attr),
+                        '11th-floor'      : R.circle(600, 285, 100).attr(attr)
                     };
                 $('#nav-select').change(function() { 
                     addTalksToTooltip(this.value) 
@@ -187,16 +187,22 @@
             body {
                 font-family: Verdana, sans;
             }
+            #container {
+                width 800px;
+                margin: 0 auto;
+                text-align: center;
+            }
             #canvas {
-                height: 600px;
+                height: 440px;
                 position: relative;
-                width: 900px;
-                float: left;
+                width: 750px;
+                margin: 0 auto;
+                text-align: center;
             }
             #paper {
-                height: 600px;
+                height: 440px;
                 position: relative;
-                width: 900px;
+                width: 750px;
                 display:block;
             }
             .tip-body {
@@ -214,101 +220,105 @@
                 width: 300px;
 
                 position : absolute;
-                /* border : 1px solid gray; */
                 background-color : #efefef;
                 color:#333;
                 padding : 3px;
                 z-index: 1000;
-                /* set this to create word wrap */
                 max-width: 200px;
             }
         </style>
     </head>
     <body>
-        <div id="canvas">
-            <div id="paper"></div>
-            <div id="tip"></div>
-            <div id="horace-mann" class="tip-body">
-                <h2>Horace Mann</h2>
-                <p>
-                </p>
-            </div>
-            <div id="thomas-paul" class="tip-body">
-                <h2>Thomas Paul</h2>
-                <p>
-                </p>
-            </div>
-            <div id="deborah-sampson" class="tip-body">
-                <h2>Deborah Sampson</h2>
-                <p>
-                </p>
-            </div>
-            <div id="abigail-adams" class="tip-body">
-                <h2>Abigail Adams</h2>
-                <p>
-                </p>
-            </div>
-            <div id="crispus-attacks" class="tip-body">
-                <h2>Crispus Attacks</h2>
-                <p>
-                </p>
-            </div>
-            <div id="area-1220" class="tip-body">
-                <h2>Area 1220</h2>
-                <p>
-                </p>
-            </div>
-            <div id="area-1235" class="tip-body">
-                <h2>Area 1235</h2>
-                <p>
-                </p>
-            </div>
-            <div id="area-1255" class="tip-body">
-                <h2>Area 1255</h2>
-                <p>
-                </p>
-            </div>
-            <div id="11th-floor" class="tip-body">
-                <h2>11th Floor</h2>
-                <p>
-                </p>
-            </div>
-        </div>
-        <p id="copy">Ohai</p>
+        <div id="container">
 
-        <div id="nav">
-            <select id="nav-select">
-                <optgroup label="sat">
-                    <option value="sat9">9:00</option>
-                    <option value="sat10">10:00</option>
-                    <option value="sat12">11:00</option>
-                    <option value="sat13">11:40</option>
-                    <option value="sat14">12:20</option>
-                    <option value="sat15">1:00</option>
-                    <option value="sat16">2:00</option>
-                    <option value="sat17">2:40</option>
-                    <option value="sat18">3:20</option>
-                    <option value="sat19">4:00</option>
-                    <option value="sat20">4:40</option>
-                    <option value="sat21">5:20</option>
-                    <option value="sat22">6:00</option>
-                    <option value="sat23">9:00</option>
-                </optgroup>
-                <optgroup label="sun">
-                    <option value="sun9">9:00</option>
-                    <option value="sun10">10:00</option>
-                    <option value="sun11">10:40</option>
-                    <option value="sun12">11:20</option>
-                    <option value="sun13">12:00</option>
-                    <option value="sun14">12:30</option>
-                    <option value="sun15">1:00</option>
-                    <option value="sun16">2:00</option>
-                    <option value="sun17">2:40</option>
-                    <option value="sun18">3:20</option>
-                    <option value="sun19">4:00</option>
-                    <option value="sun20">5:00</option>
-                </optgroup>
-            </select>
+            <h2>BarCamp Boston 7 Event Map</h2>
+            <p id="copy">See what's happening when and where at BarCamp.</p>
+
+            <div id="nav">
+                <select id="nav-select">
+                    <optgroup label="sat">
+                        <option value="sat9">9:00</option>
+                        <option value="sat10">10:00</option>
+                        <option value="sat12">11:00</option>
+                        <option value="sat13">11:40</option>
+                        <option value="sat14">12:20</option>
+                        <option value="sat15">1:00</option>
+                        <option value="sat16">2:00</option>
+                        <option value="sat17">2:40</option>
+                        <option value="sat18">3:20</option>
+                        <option value="sat19">4:00</option>
+                        <option value="sat20">4:40</option>
+                        <option value="sat21">5:20</option>
+                        <option value="sat22">6:00</option>
+                        <option value="sat23">9:00</option>
+                    </optgroup>
+                    <optgroup label="sun">
+                        <option value="sun9">9:00</option>
+                        <option value="sun10">10:00</option>
+                        <option value="sun11">10:40</option>
+                        <option value="sun12">11:20</option>
+                        <option value="sun13">12:00</option>
+                        <option value="sun14">12:30</option>
+                        <option value="sun15">1:00</option>
+                        <option value="sun16">2:00</option>
+                        <option value="sun17">2:40</option>
+                        <option value="sun18">3:20</option>
+                        <option value="sun19">4:00</option>
+                        <option value="sun20">5:00</option>
+                    </optgroup>
+                </select>
+            </div>
+
+
+            <div id="canvas">
+                <div id="paper"></div>
+                <div id="tip"></div>
+                <div id="horace-mann" class="tip-body">
+                    <h2>Horace Mann</h2>
+                    <p>
+                    </p>
+                </div>
+                <div id="thomas-paul" class="tip-body">
+                    <h2>Thomas Paul</h2>
+                    <p>
+                    </p>
+                </div>
+                <div id="deborah-sampson" class="tip-body">
+                    <h2>Deborah Sampson</h2>
+                    <p>
+                    </p>
+                </div>
+                <div id="abigail-adams" class="tip-body">
+                    <h2>Abigail Adams</h2>
+                    <p>
+                    </p>
+                </div>
+                <div id="crispus-attacks" class="tip-body">
+                    <h2>Crispus Attacks</h2>
+                    <p>
+                    </p>
+                </div>
+                <div id="area-1220" class="tip-body">
+                    <h2>Area 1220</h2>
+                    <p>
+                    </p>
+                </div>
+                <div id="area-1235" class="tip-body">
+                    <h2>Area 1235</h2>
+                    <p>
+                    </p>
+                </div>
+                <div id="area-1255" class="tip-body">
+                    <h2>Area 1255</h2>
+                    <p>
+                    </p>
+                </div>
+                <div id="11th-floor" class="tip-body">
+                    <h2>11th Floor</h2>
+                    <p>
+                    </p>
+                </div>
+            </div>
         </div>
     </body>
 </html>
