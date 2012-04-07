@@ -5,7 +5,7 @@ from taggit.managers import TaggableManager
 class Attendee(models.Model):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
-    eb_id = models.IntegerField("EventBrite ID", blank=True, null=True)
+    eb_id = models.BigIntegerField("EventBrite ID", blank=True, null=True)
     events = models.ManyToManyField('Event', blank=True, null=True)
 
     email = models.EmailField(max_length=255, blank=True, null=True)
@@ -41,7 +41,7 @@ class Event(models.Model):
     subtitle = models.CharField(max_length=200, blank=True, null=True)
     start_date = models.DateField()
     end_date = models.DateField()
-    eb_id = models.IntegerField(blank=True, null=True)
+    eb_id = models.BigIntegerField("EventBrite ID", blank=True, null=True)
 
     website = models.CharField(max_length=255, blank=True, null=True)
 
