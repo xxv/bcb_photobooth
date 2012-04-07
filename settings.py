@@ -15,6 +15,12 @@ USE_L10N = True
 
 STATIC_URL = '/static/'
 
+# the below is a default that should work for most sites,
+# but was needed in particular for Django Zoom
+import os
+ROOT_PATH = os.path.abspath(os.path.dirname(__file__))
+STATIC_ROOT = os.path.join(ROOT_PATH, "static")
+
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
