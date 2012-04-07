@@ -10,21 +10,21 @@
 <head>
     <title>{% block page_title %}{% endblock page_title %}</title>
     <!-- include jQuery library -->
-    <script type="text/javascript" src="{{MEDIA_URL}}jquery.min.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}jquery.min.js"></script>
     <!--    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.min.js"></script>-->
     <!-- include Cycle plugin -->
 
-    <script type="text/javascript" src="{{MEDIA_URL}}jquery.cycle.all.min.js"></script>
+    <script type="text/javascript" src="{{STATIC_URL}}jquery.cycle.all.min.js"></script>
     <!--<script type="text/javascript" src="http://cloud.github.com/downloads/malsup/cycle/jquery.cycle.all.2.74.js"></script>-->
 
-    <link rel="shortcut icon" href="{{MEDIA_URL}}site_icon.png">
-<!--    <link type="text/css" media="all" rel="stylesheet" href="{{MEDIA_URL}}css/style-0034.css" />-->
-    <link type="text/css" media="all" rel="stylesheet" href="{{MEDIA_URL}}css/style.css" />
-    <link rel="shortcut icon" href="{{MEDIA_URL}}favicon.ico">
-    <link rel="apple-touch-icon" href="{{MEDIA_URL}}apple-touch-icon.png">
-<!--    <link rel="stylesheet" href="{{MEDIA_URL}}css/style-0034.min.css">-->
-    <link rel="stylesheet" media="handheld" href="{{MEDIA_URL}}css/handheld.css">
-    <script src="{{MEDIA_URL}}js/libs/modernizr-1.7.min.js"></script>
+    <link rel="shortcut icon" href="{{STATIC_URL}}site_icon.png">
+<!--    <link type="text/css" media="all" rel="stylesheet" href="{{STATIC_URL}}css/style-0034.css" />-->
+    <link type="text/css" media="all" rel="stylesheet" href="{{STATIC_URL}}css/style.css" />
+    <link rel="shortcut icon" href="{{STATIC_URL}}favicon.ico">
+    <link rel="apple-touch-icon" href="{{STATIC_URL}}apple-touch-icon.png">
+<!--    <link rel="stylesheet" href="{{STATIC_URL}}css/style-0034.min.css">-->
+    <link rel="stylesheet" media="handheld" href="{{STATIC_URL}}css/handheld.css">
+    <script src="{{STATIC_URL}}js/libs/modernizr-1.7.min.js"></script>
     {% block head %}{% endblock %}
 </head>
   <body>

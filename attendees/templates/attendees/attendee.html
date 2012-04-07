@@ -5,13 +5,13 @@
         {% if attendee.email %}
         <img class="photo" src="{% gravatar_url attendee.email 150 %}" alt="" width="150" height="150" />
         {% else %}
-        <img class="photo nophoto" src="{{MEDIA_URL}}no_photo_150x300.jpg" alt="" />
+        <img class="photo nophoto" src="{{STATIC_URL}}no_photo_150x300.jpg" alt="" />
         {% endif %}
         {% endthumbnail %}
         <div class="name">{{ attendee.name }}</div>
         {% if attendee.affiliation %}<div class="affiliation">{{ attendee.affiliation }}</div>{% endif %}
         {% if attendee.website %}<div class="website">{{ attendee.website|urlizetrunc:25 }}</div>{% endif %}
-        {% if attendee.twitter %}<div class="twitter"><img src="{{MEDIA_URL}}images/twitter_bullet.png" alt="•" /> <a href="http://twitter.com/{{ attendee.twitter }}">{{attendee.twitter}}</a></div>{% endif %}
+        {% if attendee.twitter %}<div class="twitter"><img src="{{STATIC_URL}}images/twitter_bullet.png" alt="•" /> <a href="http://twitter.com/{{ attendee.twitter }}">{{attendee.twitter}}</a></div>{% endif %}
         <ul class="tags">
         {% for tag in attendee.tags.values|slice:":3" %}
         {% if tag.slug %}<li class="tag"><a href="{% url tag tagslug=tag.slug %}">{{ tag.name }}</a></li>{% endif %}
