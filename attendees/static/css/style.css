@@ -440,6 +440,12 @@ h2.dayname {
     border-radius: 5px;
 }
 
+/* common */
+
+.attendee.patron .photo, .attendee.sponsor .photo {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
 
 .attendee .badge {
     border-bottom-left-radius: 5px;
@@ -447,22 +453,20 @@ h2.dayname {
     width: 152px;
     text-align: center;
 }
+
+/* patrons */
 .attendee.patron .photo {
     border: 1px solid #5dc9f4;
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
 }
 
 .attendee.patron .badge {
-    border: 1px solid #5dc9f4;
     background-color: #5dc9f4;
     color: #000;
 }
 
+/* sponsors */
 .attendee.sponsor .photo {
     border: 1px solid #f5885f;
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
 }
 
 .attendee.sponsor .badge {
