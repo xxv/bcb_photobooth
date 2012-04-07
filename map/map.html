@@ -1,0 +1,109 @@
+<!doctype html>
+<html>
+    <head>
+        <link href="css/style.css" rel="stylesheet">
+        <link href="css/map.css" rel="stylesheet">
+        <script src="js/jquery-1.7.2.js"></script>
+        <script src="js/raphael.js"></script>
+        <script src="js/map.js"></script>
+        <script src="https://spreadsheets.google.com/feeds/cells/0AiPSd498xaohdGMzdzJNcnF5eE9zV3Q1UFp6T0t5c1E/od6/public/basic?alt=json-in-script">
+            //Saturday
+        </script>
+        <!--<script src="https://spreadsheets.google.com/feeds/cells/0AiPSd498xaohdGMzdzJNcnF5eE9zV3Q1UFp6T0t5c1E/od5/public/basic?alt=json-in-script">
+            //Sunday (loaded after saturday in map.js)
+        </script>-->
+    </head>
+    <body>
+        <div id="container">
+
+            <h2 class="copy">BarCamp Boston 7 Event Map</h2>
+            <p id="copy" class="copy">Use the dropdown to see what sessions are happening where, refresh to update data.<br> Check the <a href="http://bitly.com/BCB7schedule">schedule grid</a> to see more info at once.</p>
+
+            <div class="nav">
+                <select id="nav-select">
+                    <optgroup label="sat">
+                        <option value="sat9">9:00</option>
+                        <option value="sat10">10:00</option>
+                        <option value="sat12">11:00</option>
+                        <option value="sat13">11:40</option>
+                        <option value="sat14">12:20</option>
+                        <option value="sat15">1:00</option>
+                        <option value="sat16">2:00</option>
+                        <option value="sat17">2:40</option>
+                        <option value="sat18">3:20</option>
+                        <option value="sat19">4:00</option>
+                        <option value="sat20">4:40</option>
+                        <option value="sat21">5:20</option>
+                        <option value="sat22">6:00</option>
+                        <option value="sat23">9:00</option>
+                    </optgroup>
+                    <optgroup label="sun">
+                        <option value="sun9">9:00</option>
+                        <option value="sun10">10:00</option>
+                        <option value="sun11">10:40</option>
+                        <option value="sun12">11:20</option>
+                        <option value="sun13">12:00</option>
+                        <option value="sun14">12:30</option>
+                        <option value="sun15">1:00</option>
+                        <option value="sun16">2:00</option>
+                        <option value="sun17">2:40</option>
+                        <option value="sun18">3:20</option>
+                        <option value="sun19">4:00</option>
+                        <option value="sun20">5:00</option>
+                    </optgroup>
+                </select>
+            </div>
+
+
+            <div id="canvas">
+                <div id="paper"></div>
+                <div id="tip"></div>
+                <div id="horace-mann" class="tip-body">
+                    <h2>Horace Mann</h2>
+                    <p>
+                    </p>
+                </div>
+                <div id="thomas-paul" class="tip-body">
+                    <h2>Thomas Paul</h2>
+                    <p>
+                    </p>
+                </div>
+                <div id="deborah-sampson" class="tip-body">
+                    <h2>Deborah Sampson</h2>
+                    <p>
+                    </p>
+                </div>
+                <div id="abigail-adams" class="tip-body">
+                    <h2>Abigail Adams</h2>
+                    <p>
+                    </p>
+                </div>
+                <div id="crispus-attacks" class="tip-body">
+                    <h2>Crispus Attacks</h2>
+                    <p>
+                    </p>
+                </div>
+                <div id="area-1220" class="tip-body">
+                    <h2>Area 1220</h2>
+                    <p>
+                    </p>
+                </div>
+                <div id="area-1235" class="tip-body">
+                    <h2>Area 1235</h2>
+                    <p>
+                    </p>
+                </div>
+                <div id="area-1255" class="tip-body">
+                    <h2>Area 1255</h2>
+                    <p>
+                    </p>
+                </div>
+                <div id="11th-floor" class="tip-body">
+                    <h2>11th Floor</h2>
+                    <p>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

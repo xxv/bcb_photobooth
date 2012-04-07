@@ -1,0 +1,71 @@
+body {
+    font-family: Verdana, sans;
+}
+#container {
+    width 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+#canvas {
+    height: 440px;
+    position: relative;
+    width: 750px;
+    margin: 0 auto;
+    text-align: center;
+}
+#paper {
+    height: 440px;
+    position: relative;
+    width: 750px;
+    display:block;
+}
+.tip-body {
+    display: none;
+    height: 400px;
+}
+h2, p {
+    text-align: center;
+    padding: 5px;
+}
+h2 {
+    font-size: 24px;
+}
+p {
+    font-size: 16px;
+}
+.copy {
+    color: white;
+}
+#tip{
+    overflow: auto;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 300px;
+
+    position : absolute;
+    background-color : #efefef;
+    color:#333;
+    padding : 3px;
+    z-index: 1000;
+    max-width: 200px;
+}
+.nav select {
+    margin-top: 10px;
+    background: #666;
+    color: white;
+    width: 120px;
+    padding: 5px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    height: 34px;
+}
+.nav select optgroup {
+    background: #333;
+    color: #999;
+}
+.nav select optgroup option {
+    background: #666;
+    color: white;
+}
+
