@@ -1,6 +1,6 @@
 # Django settings for barcampboston project.
 
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 TIME_ZONE = 'America/New_York'
