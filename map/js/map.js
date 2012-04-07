@@ -220,9 +220,11 @@ $(function() {
                 });
             })(map[state], state);
         }
-        $(document).mousemove(function(e){
+        $("#paper").mousemove(function(e){
+            e = e || window.event;
             if (over){
-                $(tip).css("left", e.offsetX-100).css("top", e.offsetY+20);
+                o = $(this).offset();
+                $(tip).css("left", (e.pageX-o.left)-100).css("top", (e.pageY-o.top)+20);
                 $(tip).html(tipText);
             }
         });
