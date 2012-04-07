@@ -440,6 +440,36 @@ h2.dayname {
     border-radius: 5px;
 }
 
+
+.attendee .badge {
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    width: 152px;
+    text-align: center;
+}
+.attendee.patron .photo {
+    border: 1px solid #5dc9f4;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.attendee.patron .badge {
+    border: 1px solid #5dc9f4;
+    background-color: #5dc9f4;
+    color: #000;
+}
+
+.attendee.sponsor .photo {
+    border: 1px solid #f5885f;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.attendee.sponsor .badge {
+    background-color: #f5885f;
+    color: #000;
+}
+
 .attendee .name {
     color: #eee;
     font-size: 1.5em;

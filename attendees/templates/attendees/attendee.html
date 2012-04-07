@@ -1,4 +1,4 @@
-{% load gravatar thumbnail %}<div class="attendee">
+{% load gravatar thumbnail %}<div class="attendee{% if attendee.sponsor %} sponsor{% endif %}{% if attendee.patron %} patron{% endif %}">
     {% thumbnail attendee.photo "150x150" as photo %}
         <img class="photo" src="{{ photo.url }}" alt="" />
         {% empty %}
@@ -8,6 +8,8 @@
         <img class="photo nophoto" src="{{STATIC_URL}}no_photo_150x300.jpg" alt="" />
         {% endif %}
         {% endthumbnail %}
+        {% if attendee.patron %}<div class="badge">patron</div>{% endif %}
+        {% if attendee.sponsor %}<div class="badge">sponsor</div>{% endif %}
         <div class="name">{{ attendee.name }}</div>
         {% if attendee.affiliation %}<div class="affiliation">{{ attendee.affiliation }}</div>{% endif %}
         {% if attendee.website %}<div class="website">{{ attendee.website|urlizetrunc:25 }}</div>{% endif %}
