@@ -118,7 +118,7 @@ function selectTime(cur) {
                 x = 1;
             } else if ((h == 11)&&(m<40)) {
                 x = 2;
-            } else if ((h <= 12)&&(m<20)) {
+            } else if ((h < 12)||((h==12)&&(m<20))) {
                 x = 3;
             } else if (h < 13) {
                 x = 4;
@@ -126,13 +126,13 @@ function selectTime(cur) {
                 x = 5;
             } else if ((h == 14)&&(m<40)) {
                 x = 6;
-            } else if ((h <= 15)&&(m<20)) {
+            } else if ((h < 15)||((h==15)&&(m<20))) {
                 x = 7;
             } else if (h < 16) {
                 x = 8;
             } else if ((h == 16)&&(m<40)) {
                 x = 9;
-            } else if ((h <= 17)&&(m<20)) {
+            } else if ((h < 17)||((h==17)&&(m<20))) {
                 x = 10;
             } else if (h < 18) {
                 x = 11;
@@ -146,7 +146,7 @@ function selectTime(cur) {
                 x = 14;
             } else if ((h == 10)&&(m < 40)) {
                 x = 15;
-            } else if ((h <= 11)&&(m < 20)) {
+            } else if ((h < 11)||((h==11)&&(m < 20))) {
                 x = 16;
             } else if (h < 12) {
                 x = 17;
@@ -158,7 +158,7 @@ function selectTime(cur) {
                 x = 20;
             } else if ((h == 14)&&(m < 40)) {
                 x = 21;
-            } else if ((h <= 15)&&(m < 20)) {
+            } else if ((h < 15)||((h==15)&&(m < 20))) {
                 x = 22;
             } else if (h < 16) {
                 x = 23;
