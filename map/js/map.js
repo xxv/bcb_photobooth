@@ -254,9 +254,9 @@ $(function() {
             'empty_zone'      : R.path("M 377 307.6 L 465.9 141.6 L 358.3 141.6 L 358.3 307.6Z").attr(attr_empty),
         },
         map = {
-            'deborah-sampson' : R.path("M 247.6 213.1 L 156.2 213.1 L 156.2 254.8 L 247.6 307.6Z").attr(attr),
+            'thomas-paul' : R.path("M 247.6 213.1 L 156.2 213.1 L 156.2 254.8 L 247.6 307.6Z").attr(attr),
             'horace-mann'     : R.path("M 247.6 141.6 L 358.3 141.6 L 358.3 307.6 L 247.6 307.6Z").attr(attr),
-            'thomas-paul'     : R.path("M 247.6 141.6 L 156.2 141.6 L 156.2 213.7 L 247.6 213.7Z").attr(attr),
+            'deborah-sampson'     : R.path("M 247.6 141.6 L 156.2 141.6 L 156.2 213.7 L 247.6 213.7Z").attr(attr),
             'abigail-adams'   : R.path("M 578.4 25.3 L 578.4 75.1 L 650.9 75.1 L 650.9 25.3Z").attr(attr),
             'crispus-attacks' : R.path("M 650.3 25.3 L 650.3 75.1 L 723.3 75.1 L 723.3 25.3Z").attr(attr),
             'area-1220'       : R.path("M 156.2 60.1 L 156.2 100.1 L 345.2 100.1 L 345.2 60.1Z").attr(attr),
