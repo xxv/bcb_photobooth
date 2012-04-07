@@ -40,6 +40,7 @@ INSTALLED_APPS = (
     'treemenus',
     'sorl.thumbnail',
     'taggit',
+    'django_gravatar',
 )
 
 try:

@@ -57,6 +57,7 @@ def load_attendees(event, doc):
             a.eb_id = eb_id
         a.first_name = attendee['first_name'].strip()
         a.last_name = attendee['last_name'].strip()
+        a.email = attendee['email'].strip()
         #print "%s %s" % (a.first_name, a.last_name)
         answers = eb_questions(attendee)
         # bcb6 if '957323' in answers:

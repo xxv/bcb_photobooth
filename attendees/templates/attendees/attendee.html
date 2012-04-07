@@ -1,8 +1,12 @@
-{% load thumbnail %}<div class="attendee">
-    {% thumbnail attendee.photo "150x300" as photo %}
+{% load gravatar thumbnail %}<div class="attendee">
+    {% thumbnail attendee.photo "150x150" as photo %}
         <img class="photo" src="{{ photo.url }}" alt="" />
         {% empty %}
+        {% if attendee.email %}
+        <img class="photo" src="{% gravatar_url attendee.email 150 %}" alt="" width="150" height="150" />
+        {% else %}
         <img class="photo nophoto" src="{{MEDIA_URL}}no_photo_150x300.jpg" alt="" />
+        {% endif %}
         {% endthumbnail %}
         <div class="name">{{ attendee.name }}</div>
         {% if attendee.affiliation %}<div class="affiliation">{{ attendee.affiliation }}</div>{% endif %}
@@ -14,4 +18,3 @@
         {% endfor %}
     </ul>
     </div>
-

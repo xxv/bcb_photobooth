@@ -2,15 +2,13 @@ from django.db import models
 
 from taggit.managers import TaggableManager
 
-import datetime
-
-
 class Attendee(models.Model):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     eb_id = models.IntegerField("EventBrite ID", blank=True, null=True)
     events = models.ManyToManyField('Event', blank=True, null=True)
 
+    email = models.EmailField(max_length=255, blank=True, null=True)
     affiliation = models.CharField(max_length=255, blank=True, null=True)
     twitter = models.CharField('Twitter ID', max_length=200, blank=True, null=True)
     linkedin = models.CharField(max_length=255, blank=True, null=True)
