@@ -236,7 +236,7 @@ $(function() {
             "stroke-linejoin": "round"
         },
         attr_empty = {
-            fill: "#000",
+            fill: "#1e1e1e",
             stroke: "#000",
             "stroke-width": 1,
             "stroke-linejoin": "round"
@@ -249,7 +249,7 @@ $(function() {
         },
         map_background = {
             'background'      : R.path("M 120.8 60.1 L 345.2 60.1 L 345.2 25.3 L 488.9 25.3 L 488.9 75.1 L 578.4 75.1 L 578.4 25.3 L 723.3 25.3 L 723.3 75.1 L 723.3 141 L 505.1 141 L 358.3 414.6 L 30.6 267.4Z").attr(attr_bg),
-            'empty_zone'      : R.path("M 377 307.6 L 465.9 141 L 358.3 141 L 358.3 307.6Z").attr(attr_empty),
+            'empty_zone'      : R.path("M 377 307.6 L 465.9 141.6 L 358.3 141.6 L 358.3 307.6Z").attr(attr_empty),
         },
         map = {
             'deborah-sampson' : R.path("M 247.6 213.1 L 156.2 213.1 L 156.2 254.8 L 247.6 307.6Z").attr(attr),
