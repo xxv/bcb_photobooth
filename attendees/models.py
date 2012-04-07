@@ -74,7 +74,7 @@ class TimeSlot(models.Model):
 
     def isActive(self):
         #TODO return now() > start_time && < end_time ?
-        return true
+        return True
 
 class Talk(models.Model):
     name = models.CharField(max_length=255)
