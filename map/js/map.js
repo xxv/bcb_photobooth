@@ -152,17 +152,17 @@ function selectTime(cur) {
                 x = 17;
             } else if ((h == 12)&&(m < 30)) {
                 x = 18;
-            } else if (h < 1) {
+            } else if (h < 13) {
                 x = 19;
-            } else if (h < 2) {
+            } else if (h < 14) {
                 x = 20;
-            } else if ((h == 2)&&(m < 40)) {
+            } else if ((h == 14)&&(m < 40)) {
                 x = 21;
-            } else if ((h <= 3)&&(m < 20)) {
+            } else if ((h <= 15)&&(m < 20)) {
                 x = 22;
-            } else if (h < 4) {
+            } else if (h < 16) {
                 x = 23;
-            } else if (h < 5) {
+            } else if (h < 17) {
                 x = 24;
             } else {
                 x = 25;
