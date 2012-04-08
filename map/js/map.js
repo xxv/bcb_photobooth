@@ -102,7 +102,7 @@ function selectTime(cur) {
     // 14=9, 15=10, 16=10:40, 17=11:20, 18=12, 19=12:30, 20=1, 21=2, 22=2:40, 23=3:20, 24=4, 25=5
     var x = 0,
         sat = 6,
-        sun = 7,
+        sun = 0,
         month = 3,
         year = 2012;
     if ((cur.getFullYear() == year)&&(cur.getMonth() == month)) {
