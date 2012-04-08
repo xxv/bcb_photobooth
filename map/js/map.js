@@ -72,6 +72,9 @@ function callback(data) {
     if (isSat) {
         $("head").append('<script src="https://spreadsheets.google.com/feeds/cells/0AiPSd498xaohdGMzdzJNcnF5eE9zV3Q1UFp6T0t5c1E/od5/public/basic?alt=json-in-script"><\/script>')
         isSat = false
+    } else {
+        selectTime(new Date());
+        addTalksToTooltip($('#nav-select').val());
     }
 }
 
@@ -171,6 +174,7 @@ function selectTime(cur) {
     } else {
         x = 25;
     }
+    
     $("#nav-select").prop("selectedIndex", x)
 }
 
@@ -191,6 +195,7 @@ $(function() {
         }
         makeTooltips();
     }
+    window.addTalksToTooltip = addTalksToTooltip;
             
     function makeTooltips() {
         var current = null;
@@ -278,13 +283,10 @@ $(function() {
             '1255-door-2'   : R.arrow(373, 326, 388, 326, 7)
         };
 
+
     $('#nav-select').change(function() { 
         addTalksToTooltip(this.value) 
     })
-
-    selectTime(new Date());
-
-    addTalksToTooltip($('#nav-select').val());
 
 })
 
