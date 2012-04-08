@@ -109,9 +109,7 @@ function selectTime(cur) {
         var d = cur.getDay(), // 0-30(31, leap)
             h = cur.getHours(), // 0-23
             m = cur.getMinutes(); // 0-59
-        if (d < sat) {
-            x = 0;
-        } else if (d == sat) { 
+        if (d == sat) { 
             if (h <= 9) {
                 x = 0;
             } else if (h == 10) {
