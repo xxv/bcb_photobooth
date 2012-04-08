@@ -106,7 +106,7 @@ def attendee_view(request):
 def get_attendees(request):
     attendees = []
     for attendee in Attendee.objects.all():
-        attendees.append({'first_name': attendee.first_name, 'last_name': attendee.last_name, 'org': attendee.affiliation or ""})
+        attendees.append({'first_name': attendee.first_name, 'last_name': attendee.last_name, 'org': attendee.affiliation or "", 'twitter': attendee.twitter or "", 'tags': [a.name for a in attendee.tags.all()] })
     return HttpResponse(json.dumps(attendees))
 
 def create_attendee(request):
