@@ -362,6 +362,22 @@ h2.dayname {
     padding: 1em;
 }
 
+#content {
+    color: #ddd;
+
+}
+
+#content a {
+    color: #aad;
+}
+
+h2 {
+    color: #fff;
+    font-family: MuseoSans;
+    font-weight: bold;
+    font-size: 1.7em;
+}
+
 #header {
     margin-left: 4em;
     font-family: MuseoSans;
@@ -387,19 +403,17 @@ h2.dayname {
     font-size: 2em;
 }
 
-.letters {
-}
-
-.letters li {
+#content .letters li {
     display: inline-block;
 }
 
-.letters li a {
+#content .letters li a {
     display: inline-block;
     padding: 0.8em;
     padding-top: 0.25em;
     padding-bottom: 0.25em;
     background-color: #aaa;
+    color: #000;
     min-width: 1em;
     text-align: center;
     border-top-left-radius: 10px;
@@ -410,18 +424,14 @@ h2.dayname {
     box-shadow: 0 1px 3px #000;
     vertical-align: bottom;
     text-transform: uppercase;
+    text-decoration: none;
 }
 
-.letters li.current a {
+#content .letters li.current a {
     background-color: #ccc;
     padding-bottom: 0.5em;
 }
 
-
-.letters li a {
-    text-decoration: none;
-    color: #000;
-}
 
 .attendee {
     display: inline-block;
@@ -485,14 +495,14 @@ h2.dayname {
     font-size: 1.1em;
 }
 
-.attendee .tags {
+#content .attendee .tags {
     display: block;
     list-style: none;
     margin: 0; padding: 0;
     margin-top: 0.5em;
 }
 
-.attendee .tags .tag {
+#content .attendee .tags .tag {
     display: inline;
     line-height: 2em;
     padding: 3px;
@@ -502,8 +512,13 @@ h2.dayname {
     white-space: nowrap;
 }
 
-.attendee .tag a {
+#content .attendee .tag a {
     color: #000;
+}
+
+#footer {
+
+    margin-top: 5em;
 }
 
 /* end steve changes */
