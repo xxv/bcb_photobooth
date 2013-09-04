@@ -10,6 +10,7 @@ from attendees.models import Event
 from make_pdf import MakePdf
 import urllib
 import os
+import sys
 import unicodedata
 
 #####################################################################
@@ -72,7 +73,16 @@ def make_mecard(attendee):
 
 if __name__ == '__main__':
     mkpdf = MakePdf('badge', svg_file)
-    for attendee in Event.objects.get(slug=event).attendee_set.all():
+    if len(sys.argv) > 1:
+        p = sys.argv[1]
+        from django.db.models import Q
+        query = Q(first_name__icontains=p) | Q(last_name__icontains=p)
+        attendees = Event.objects.get(slug=event).attendee_set.filter(query)
+        make_blanks = False
+    else:
+        attendees = Event.objects.get(slug=event).attendee_set.all()
+        make_blanks = True
+    for attendee in attendees:
         qrcode_url = make_mecard(attendee)
         qrcode_file = "qrcode.png"
         tags = attendee.tags.all()
@@ -95,17 +105,18 @@ if __name__ == '__main__':
         urllib.urlretrieve(qrcode_url, qrcode_file)
         mkpdf.make_pdf(params, get_filename(params))
 
-    print "Generating serialized blanks..."
-    for i in range(0,200):
-        mecard = "BCB7:%d" % i
-        qrcode_url = u'http://chart.apis.google.com/chart?%s' % urllib.urlencode({"cht": u"qr", "chs": u"350x350", u"chl": mecard})
-        qrcode_file = "qrcode.png"
-        urllib.urlretrieve(qrcode_url, qrcode_file)
-        params = {
-            'last_name': "______________",
-            'first_name': '______________',
-            'eb_id': "extra_%d" % i,
-            'tags': ['__________', '__________', '__________'],
-            'qrcode': qrcode_file,
-        }
-        mkpdf.make_pdf(params, get_filename(params))
+    if make_blanks:
+        print "Generating serialized blanks..."
+        for i in range(0,200):
+            mecard = "BCB7:%d" % i
+            qrcode_url = u'http://chart.apis.google.com/chart?%s' % urllib.urlencode({"cht": u"qr", "chs": u"350x350", u"chl": mecard})
+            qrcode_file = "qrcode.png"
+            urllib.urlretrieve(qrcode_url, qrcode_file)
+            params = {
+                'last_name': "______________",
+                'first_name': '______________',
+                'eb_id': "extra_%d" % i,
+                'tags': ['__________', '__________', '__________'],
+                'qrcode': qrcode_file,
+            }
+            mkpdf.make_pdf(params, get_filename(params))
