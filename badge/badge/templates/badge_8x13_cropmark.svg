@@ -263,13 +263,13 @@
      inkscape:label="main"
      style="display:inline">
     <image
-       sodipodi:absref="/home/steve/work/barcampboston/bcb7/bcb_photobooth/badge/badge/templates/{{qrcode}}"
+       sodipodi:absref="/home/steve/p/bcb/bcb_photobooth/badge/badge/templates/{{qrcode}}"
        xlink:href="{{qrcode}}"
-       width="70.369705"
-       height="70.369705"
-       id="qrcode"
+       y="28.695663"
        x="66.525078"
-       y="28.695663" />
+       id="qrcode"
+       height="70.369705"
+       width="70.369705" />
     <rect
        y="-332.93039"
        x="26.123974"
@@ -687,7 +687,7 @@
      inkscape:groupmode="layer"
      id="layer4"
      inkscape:label="back"
-     style="display:inline"
+     style="display:none"
      sodipodi:insensitive="true">
     <rect
        style="color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
