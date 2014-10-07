@@ -7,7 +7,7 @@ from django.http import HttpResponse, HttpResponseBadRequest
 from django.shortcuts import get_object_or_404
 from django.views.generic import list_detail
 from django.views.decorators.http import require_http_methods
-from django.views.decorators.csrf import csrf_exempt 
+from django.views.decorators.csrf import csrf_exempt
 
 from taggit.models import Tag
 from djutils.decorators import async
@@ -75,7 +75,6 @@ def upload_photo(request, eb_id=None, id=None):
         'photo': photo_url}), mimetype='application/json')
 
 
-        
 @require_http_methods(["GET"])
 def get_attendee(request, eb_id=None, id=None):
     if id:
@@ -139,7 +138,10 @@ def perform_sync():
     for event in eb.sync_events.all():
         try:
             attendees = ebc.list_event_attendees(event_id=int(event.eb_id))
-            load_attendees(event, attendees)
+            with open("%s.attendees_dump.json" % (event.slug), "w") as f:
+                f.write(json.dumps(attendees, indent=4))
+            with open("%s.load_attendees.json" % (event.slug), "r") as cfg:
+                load_attendees(event, attendees, cfg)
             loaded.append(event.title)
         except RuntimeError as e:
             logger.error("error loading event %s: %s\n" % (event, e))

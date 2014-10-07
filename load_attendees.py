@@ -7,7 +7,7 @@ import json
 from django_bootstrap import bootstrap
 bootstrap(__file__)
 
-from attendees.models import Attendee
+from attendees.models import Attendee, Event
 
 def eb_questions(attendee):
     a = {}
@@ -44,9 +44,9 @@ def filter_site(site):
 def filter_tags(tags):
     return map(lambda t: t.strip(), tags.split(','))
 
-def load_attendees(event, doc):
-
+def load_attendees(event, doc, config):
     attendees = doc['attendees']
+    ebq = config['eventbrite']['questions']
     for attendeeObj in attendees:
         attendee = attendeeObj['attendee']
         eb_id = attendee['id']
@@ -58,29 +58,33 @@ def load_attendees(event, doc):
         a.first_name = attendee['first_name'].strip()
         a.last_name = attendee['last_name'].strip()
         a.email = attendee['email'].strip()
-        #print "%s %s" % (a.first_name, a.last_name)
-        answers = eb_questions(attendee)
-        # bcb6 if '957323' in answers:
-        if '1965641' in answers:
-            twitter = filter_twitter(answers['1965641'].split(',')[0])
-            if twitter:
-                a.twitter = twitter
-        # bcb6 if '957329' in answers:
-        if '1965653' in answers:
-            site = filter_site(answers['1965653'].split(',')[0])
+        if 'website' in attendee:
+            site = filter_site(attendee['website'].split(',')[0])
             if site:
                 a.website = site
-        # bcb6 if '957327' in answers:
-        if '1965645' in answers:
-            a.affiliation = answers['1965645']
-            
+        #print "%s %s" % (a.first_name, a.last_name)
+        answers = eb_questions(attendee)
+        if ebq['twitter'] in answers:
+            twitter = filter_twitter(answers[ebq['twitter']].split(',')[0])
+            if twitter:
+                a.twitter = twitter
+        if 'site' in ebq and ebq['site'] in answers:
+            site = filter_site(answers[ebq['site']].split(',')[0])
+            if site:
+                a.website = site
+        if ebq['affiliation'] in answers:
+            a.affiliation = answers[ebq['affiliation']]
         a.save()
         # now add the relations
-        # bcb6 if '957331' in answers:
-        if '1965659' in answers:
-            tags = filter_tags(answers['1965659'].lower())
+        if ebq['tags'] in answers:
+            tags = filter_tags(answers[ebq['tags']].lower())
             a.tags.set(*tags)
         a.events.add(event)
 
 if __name__ == "__main__":
-    load_attendees(json.load(open(sys.argv[1])))
+    with open(sys.argv[1]) as attendee_doc_file:
+        with open(sys.argv[2]) as config_file:
+            attendee_doc = json.load(attendee_doc_file)
+            config = json.load(config_file)
+            load_attendees(Event.objects.get(slug=sys.argv[3]), attendee_doc, config)
+
